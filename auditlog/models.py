@@ -14,8 +14,6 @@ from django.utils.encoding import smart_str
 from django.utils.translation import ugettext_lazy as _
 from jsonfield.fields import JSONField
 
-auth_user_model = apps.get_model(app_label, model_name)
-
 
 class LogEntryManager(models.Manager):
     """
@@ -182,7 +180,7 @@ class LogEntry(models.Model):
     remote_addr = models.GenericIPAddressField(blank=True, null=True, verbose_name=_("remote address"))
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name=_("timestamp"))
     additional_data = JSONField(blank=True, null=True, verbose_name=_("additional data"))
-    seen_by = models.ForeignKey(auth_user_model, on_delete=models.SET_NULL, null=True, blank=True,)
+    seen_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,)
 
     objects = LogEntryManager()
 
