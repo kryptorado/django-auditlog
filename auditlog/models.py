@@ -180,7 +180,7 @@ class LogEntry(models.Model):
     remote_addr = models.GenericIPAddressField(blank=True, null=True, verbose_name=_("remote address"))
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name=_("timestamp"))
     additional_data = JSONField(blank=True, null=True, verbose_name=_("additional data"))
-    seen_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="seen_by", on_delete=models.SET_NULL, null=True, blank=True,)
+    seen_by = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="seen_by", null=True, blank=True,)
 
     objects = LogEntryManager()
 

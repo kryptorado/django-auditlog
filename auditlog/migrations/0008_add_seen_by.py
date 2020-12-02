@@ -1,5 +1,4 @@
 from django.db import models, migrations
-import django.db.models.deletion
 from django.conf import settings
 
 
@@ -13,10 +12,9 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='logentry',
             name='seen_by',
-            field=models.ForeignKey(
-                on_delete=django.db.models.deletion.SET_NULL,
-                blank=True,
+            field=models.ManyToManyField(
                 to=settings.AUTH_USER_MODEL,
+                blank=True,
                 null=True,
                 related_name="seen_by",
             ),
